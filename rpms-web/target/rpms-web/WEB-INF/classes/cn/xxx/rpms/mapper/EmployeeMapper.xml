@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Employee" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="BIGINT" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from employee
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Employee" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+
+    insert into employee ( name, pwd,
+      age, tel, email)
+    values ( #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR},
+      #{age,jdbcType=INTEGER}, #{tel,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Employee" >
+    update employee
+    set name = #{name,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=BIGINT},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, name, pwd, age, tel, email
+    from employee
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select id, name, pwd, age, tel, email
+    from employee
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, pwd, age, tel, email
+    from employee
+  </select>
+  <resultMap id="ManyMap" type="cn.xxx.rpms.domain.Employee" >
+    <id column="eid" property="id" jdbcType="BIGINT" />
+    <result column="ename" property="name" jdbcType="VARCHAR" />
+    <result column="epwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="eage" property="age" jdbcType="INTEGER" />
+    <result column="etel" property="tel" jdbcType="BIGINT" />
+    <result column="eemail" property="email" jdbcType="VARCHAR" />
+    <collection property="roles" ofType="cn.xxx.rpms.domain.Role">
+      <id column="rid" property="id" jdbcType="BIGINT" />
+      <result column="rsn" property="sn" jdbcType="VARCHAR" />
+      <result column="rname" property="name" jdbcType="VARCHAR" />
+      <result column="rpermission" property="permission" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+<!--从角色查询全部角色-->
+  <select id="selectManyRole" resultMap="ManyMap" parameterType="cn.xxx.basic.query.BaseQuery">
+    select e.id eid, e.name ename, e.pwd epwd, e.age eage, e.tel etel, e.email eemail,
+            r.id rid,r.sn rsn ,r.name rname,r.permission rpermission
+    from employee e LEFT JOIN  employee_role er on e.id=er.employee_id RIGHT JOIN
+    role r on r.id=er.role_id
+  </select>
+  <!--从角色查询一个角色-->
+  <select id="selectManyRoleByID" resultMap="ManyMap"  parameterType="java.lang.Long">
+    select e.id eid, e.name ename, e.pwd epwd, e.age eage, e.tel etel, e.email eemail,
+            r.id rid,r.sn rsn ,r.name rname,r.permission rpermission
+    from employee e LEFT JOIN  employee_role er on e.id=er.employee_id RIGHT JOIN
+    role r on r.id=er.role_id
+    where e.id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+</mapper>

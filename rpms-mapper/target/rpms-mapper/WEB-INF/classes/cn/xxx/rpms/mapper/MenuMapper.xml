@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.MenuMapper" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  delete from menu
+  where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Menu" >
+
+    insert into menu ( sn, name,
+      parent, icon, url, intro,menuId
+      )
+    values ( #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{parent,jdbcType=BIGINT}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}
+      ,#{menuId}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Menu" >
+    update menu
+    set sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      parent = #{parent,jdbcType=BIGINT},
+      icon = #{icon,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="allMap" parameterType="java.lang.Long" >
+    select m.id mid,m.sn msn,m.name mname,m.icon micon,m.url murl,m.intro mintro
+    from menu m
+    where m.id = #{id,jdbcType=BIGINT}
+  </select>
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Menu" >
+    <id column="pid" property="id" jdbcType="BIGINT" />
+    <result column="psn" property="sn" jdbcType="VARCHAR" />
+    <result column="pname" property="name" jdbcType="VARCHAR" />
+    <result column="picon" property="icon" jdbcType="VARCHAR" />
+    <result column="purl" property="url" jdbcType="VARCHAR" />
+    <result column="pintro" property="intro" jdbcType="VARCHAR" />
+    <collection property="children" ofType="cn.xxx.rpms.domain.Menu" >
+      <id column="sid" property="id" jdbcType="BIGINT" />
+      <result column="sparent" property="parent"/>
+      <result column="ssn" property="sn" jdbcType="VARCHAR" />
+      <result column="sname" property="name" jdbcType="VARCHAR" />
+      <result column="sicon" property="icon" jdbcType="VARCHAR" />
+      <result column="surl" property="url" jdbcType="VARCHAR" />
+      <result column="sintro" property="intro" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectSelf" resultMap="BaseResultMap" parameterType="cn.xxx.basic.query.BaseQuery">
+     select p.name pname,p.id pid,p.sn psn,p.icon picon,p.url purl,p.intro pintro,
+    s.id sid,s.sn ssn,s.name sname,s.icon sicon,s.url surl,s.intro sintro,s.parent sparent
+    from menu s,menu p WHERE s.parent=p.id
+  </select>
+  <select id="selectSelfNoQuery" resultMap="BaseResultMap" >
+    select p.name pname,p.id pid,p.sn psn,p.icon picon,p.url purl,p.intro pintro,
+    s.id sid,s.sn ssn,s.name sname,s.icon sicon,s.url surl,s.intro sintro,s.parent sparent
+    from menu s,menu p WHERE s.parent=p.id
+  </select>
+  <select id="selectSelfById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+
+SELECT * FROM ( select p.name pname,p.id pid,p.sn psn,p.icon picon,p.url purl,p.intro pintro,
+    s.id sid,s.sn ssn,s.name sname,s.icon sicon,s.url surl,s.intro sintro,s.parent sparent
+    from menu s,menu p WHERE s.parent=p.id ) as a WHERE a.pid= #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="deletChildrenByParent" resultMap="allMap" parameterType="java.lang.Long">
+       delete from menu
+  where parent = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="selectParent" resultMap="allMap">
+      select m.id mid,m.sn msn,m.name mname,m.icon micon,m.url murl,m.intro mintro,m.parent mparent
+    from menu m WHERE m.parent is null
+  </select>
+
+
+
+  <select id="loadDataByQuery" resultMap="allMap" parameterType="cn.xxx.basic.query.BaseQuery" >
+      select m.id mid,m.sn msn,m.name mname,m.icon micon,m.url murl,m.intro mintro,m.parent mparent
+    from menu m
+  </select>
+
+
+
+  <resultMap id="allMap" type="cn.xxx.rpms.domain.Menu" >
+    <id column="mid" property="id" jdbcType="BIGINT" />
+    <result column="msn" property="sn" jdbcType="VARCHAR" />
+    <result column="mname" property="name" jdbcType="VARCHAR" />
+    <result column="mparent" property="parent" jdbcType="BIGINT" />
+    <result column="micon" property="icon" jdbcType="VARCHAR" />
+    <result column="murl" property="url" jdbcType="VARCHAR" />
+    <result column="mintro" property="intro" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAll" resultMap="allMap" >
+    select m.id mid,m.sn msn,m.name mname,m.icon micon,m.url murl,m.intro mintro
+    from menu m
+  </select>
+
+
+</mapper>

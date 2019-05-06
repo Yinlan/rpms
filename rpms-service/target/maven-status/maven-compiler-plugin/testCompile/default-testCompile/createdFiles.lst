@@ -1,0 +1,9 @@
+cn\xxx\rpms\service\MneuServiceTest.class
+cn\xxx\rpms\service\MantenceServiceTest.class
+cn\xxx\rpms\service\PartsServiceTest.class
+cn\xxx\rpms\service\EmployeeServiceTest.class
+cn\xxx\rpms\service\MaintenanceItemServiceTest.class
+cn\xxx\rpms\service\MD5Test.class
+cn\xxx\rpms\service\OptServiceTest.class
+cn\xxx\rpms\service\RoleServiceTest.class
+cn\xxx\rpms\service\PermissionServiceTest.class

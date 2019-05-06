@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="basic-core" />
+        <module name="basic-utils" />
+        <module name="rpms-common" />
+        <module name="rpms-cxf" />
+        <module name="rpms-mapper" />
+        <module name="rpms-service" />
+        <module name="rpms-web" />
+        <module name="test" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="basic-core" target="1.7" />
+      <module name="basic-utils" target="1.7" />
+      <module name="carservice-total" target="1.7" />
+      <module name="rpms-common" target="1.7" />
+      <module name="rpms-cxf" target="1.7" />
+      <module name="rpms-mapper" target="1.8" />
+      <module name="rpms-service" target="1.8" />
+      <module name="rpms-web" target="1.7" />
+      <module name="test" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

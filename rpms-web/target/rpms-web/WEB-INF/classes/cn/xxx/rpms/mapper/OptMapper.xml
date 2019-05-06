@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.OptMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Opt" >
+    <id column="optid" property="optid" jdbcType="BIGINT" />
+    <result column="optname" property="optname" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="hiredate" property="hiredate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from opt
+    where optid = #{optid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Opt" >
+    insert into opt ( optname, age,
+      email, hiredate)
+    values ( #{optname,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER},
+      #{email,jdbcType=VARCHAR}, #{hiredate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Opt" >
+    update opt
+    set optname = #{optname,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      hiredate = #{hiredate,jdbcType=TIMESTAMP}
+    where optid = #{optid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select optid, optname, age, email, hiredate
+    from opt
+    where optid = #{optid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select optid, optname, age, email, hiredate
+    from opt
+  </select>
+  <select id="loadDataByQuery" resultMap="BaseResultMap"  parameterType="cn.xxx.basic.query.BaseQuery">
+    select optid, optname, age, email, hiredate
+    from opt
+  </select>
+  <select id="loadDataByQueryLimt" resultMap="BaseResultMap"  parameterType="cn.xxx.rpms.query.OptQuery">
+    select optid, optname, age, email, hiredate
+    from opt
+    <where>
+      <if test="optname!=null and optname!=''">
+        AND optname LIKE concat("%",#{optname},"%")
+      </if>
+      <if test="bignDate!=null and bignDate!=''">
+
+        AND hiredate >= #{bignDate,jdbcType=TIMESTAMP}
+      </if>
+     <if test="endDate!=null and endDate!=''">
+        AND hiredate <![CDATA[<]]> #{endDate,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+
+</mapper>

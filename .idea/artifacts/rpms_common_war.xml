@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rpms-common:war">
+    <output-path>$PROJECT_DIR$/rpms-common/target</output-path>
+    <root id="archive" name="carservice-total.war">
+      <element id="artifact" artifact-name="rpms-common:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.MaintenancebuildMapper" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from maintenancebuild
+    where sid = #{sid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Maintenancebuild" >
+    insert into maintenancebuild ( custormer, mainid,
+      settedtime, re_amount, pay_amount, 
+      payid)
+    values ( #{custormer,jdbcType=VARCHAR}, #{mainid,jdbcType=BIGINT},
+      #{settedtime,jdbcType=TIMESTAMP}, #{reAmount,jdbcType=DECIMAL}, #{payAmount,jdbcType=DECIMAL}, 
+      #{payid,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Maintenancebuild" >
+    update maintenancebuild
+    set custormer = #{custormer,jdbcType=VARCHAR},
+      mainid = #{mainid,jdbcType=BIGINT},
+      settedtime = #{settedtime,jdbcType=TIMESTAMP},
+      re_amount = #{reAmount,jdbcType=DECIMAL},
+      pay_amount = #{payAmount,jdbcType=DECIMAL},
+      payid = #{payid,jdbcType=BIGINT}
+    where sid = #{sid,jdbcType=BIGINT}
+  </update>
+  <resultMap id="maintenancebuildMapper" type="cn.xxx.rpms.domain.Maintenancebuild">
+    <id column="msid" property="sid" jdbcType="BIGINT" />
+    <result column="mcustormer" property="custormer" jdbcType="VARCHAR" />
+    <result column="msettedtime" property="settedtime" jdbcType="TIMESTAMP" />
+    <result column="mreAmount" property="reAmount" jdbcType="DECIMAL" />
+    <result column="mpayAmount" property="payAmount" jdbcType="DECIMAL" />
+    <result column="mmainid" property="mainid" jdbcType="BIGINT" />
+
+    <!--查出支付方式-->
+    <association property="payType" column="mpayType" javaType="cn.xxx.rpms.domain.PayType" select="cn.xxx.rpms.mapper.PayTypeMapper.selectByPrimaryKey"></association>
+
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="maintenancebuildMapper" parameterType="java.lang.Long" >
+  select m.sid msid,m.custormer mcustormer,m.mainid mmainid,m.settedtime msettedtime,m.re_amount mreAmount,
+    m.pay_amount mpayAmount,m.payid mpayType
+    from maintenancebuild m
+    where m.sid = #{sid,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="maintenancebuildMapper" >
+    select m.sid msid,m.custormer mcustormer,m.mainid mmainid,m.settedtime msettedtime,m.re_amount mreAmount,
+    m.pay_amount mpayAmount,m.payid mpayType
+    from maintenancebuild m
+  </select>
+  <select id="loadDataByQuery" resultMap="maintenancebuildMapper" parameterType="cn.xxx.basic.query.BaseQuery">
+  select m.sid msid,m.custormer mcustormer,m.mainid mmainid,m.settedtime msettedtime,m.re_amount mreAmount,
+    m.pay_amount mpayAmount,m.payid mpayType
+    from maintenancebuild m
+  </select>
+  <select id="loadDataByQueryLimt" resultMap="maintenancebuildMapper" parameterType="cn.xxx.rpms.query.MaintenanceBuildQuery">
+  select m.sid msid,m.custormer mcustormer,m.mainid mmainid,m.settedtime msettedtime,m.re_amount mreAmount,
+    m.pay_amount mpayAmount,m.payid mpayType
+    from maintenancebuild m
+    <where>
+      <if test="custormer!=null and custormer!='' ">
+        AND custormer LIKE concat("%",#{custormer},"%")
+      </if>
+    </where>
+  </select>
+
+</mapper>

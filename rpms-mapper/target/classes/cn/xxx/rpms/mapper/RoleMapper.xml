@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Role" >
+
+    insert into role ( sn, name,
+      permission)
+    values ( #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertGetId" parameterType="cn.xxx.rpms.domain.Role" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+    insert into role ( sn, name,
+      permission)
+    values ( #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{permission,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Role" >
+    update role
+    set sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, sn, name, permission
+    from role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="loadDataByQuery" resultMap="BaseResultMap" parameterType="cn.xxx.basic.query.BaseQuery">
+    select id, sn, name, permission
+    from role
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, sn, name, permission
+    from role
+  </select>
+  <resultMap id="manyMap" type="cn.xxx.rpms.domain.Role" >
+    <id column="rid" property="id" jdbcType="BIGINT" />
+    <result column="rsn" property="sn" jdbcType="VARCHAR" />
+    <result column="rname" property="name" jdbcType="VARCHAR" />
+    <result column="rpermission" property="permission" jdbcType="VARCHAR" />
+    <collection property="permissions" ofType="cn.xxx.rpms.domain.Permission">
+      <id column="perid" property="id" jdbcType="BIGINT" />
+      <result column="pername" property="name" jdbcType="VARCHAR" />
+      <result column="perurl" property="url" jdbcType="VARCHAR" />
+      <result column="perresource" property="resource" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectManyToPermission" resultMap="manyMap" parameterType="cn.xxx.basic.query.BaseQuery">
+    select per.id perid, per.name pername, per.url perurl, per.resource perresource,
+    r.id rid ,r.sn rsn ,r.name rname ,r.permission rpermission
+    from role r  left JOIN role_permission rp on  rp.role_id =r.id  LEFT JOIN permission per  on per.id=rp.permission_id
+  </select>
+  <select id="selectManyToPermissionByID" resultMap="manyMap" parameterType="java.lang.Long">
+    select per.id perid, per.name pername, per.url perurl, per.resource perresource,
+    r.id rid ,r.sn rsn ,r.name rname ,r.permission rpermission
+    from role r  left JOIN role_permission rp on  rp.role_id =r.id  RIGHT JOIN permission per  on per.id=rp.permission_id
+  WHERE r.id= #{id,jdbcType=BIGINT}
+</select>
+
+  <resultMap id="manyEmployeeMap" type="cn.xxx.rpms.domain.Role" >
+    <id column="rid" property="id" jdbcType="BIGINT" />
+    <result column="rsn" property="sn" jdbcType="VARCHAR" />
+    <result column="rname" property="name" jdbcType="VARCHAR" />
+    <result column="rpermission" property="permission" jdbcType="VARCHAR" />
+    <collection property="employees" ofType="cn.xxx.rpms.domain.Employee">
+      <id column="eid" property="id" jdbcType="BIGINT" />
+      <result column="ename" property="name" jdbcType="VARCHAR" />
+      <result column="epwd" property="pwd" jdbcType="VARCHAR" />
+      <result column="eage" property="age" jdbcType="INTEGER" />
+      <result column="etel" property="tel" jdbcType="BIGINT" />
+      <result column="eemail" property="email" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectManyToEmployee" resultMap="manyEmployeeMap" parameterType="cn.xxx.basic.query.BaseQuery">
+  select e.id eid, e.name ename, e.pwd epwd, e.age eage, e.tel etel, e.email eemail,
+            r.id rid,r.sn rsn ,r.name rname,r.permission rpermission
+    from employee e LEFT JOIN  employee_role er on e.id=er.employee_id RIGHT JOIN
+    role r on r.id=er.role_id
+  </select>
+
+  <select id="selectManyToEmployeeByID" resultMap="manyEmployeeMap" parameterType="java.lang.Long">
+  select e.id eid, e.name ename, e.pwd epwd, e.age eage, e.tel etel, e.email eemail,
+            r.id rid,r.sn rsn ,r.name rname,r.permission rpermission
+    from employee e LEFT JOIN  employee_role er on e.id=er.employee_id RIGHT JOIN
+    role r on r.id=er.role_id
+    WHERE r.id= #{id,jdbcType=BIGINT}
+  </select>
+
+</mapper>

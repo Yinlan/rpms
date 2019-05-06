@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.Employee_RoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Employee_Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="employee_id" property="employeeId" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from employee_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByEidAndRid" parameterType="cn.xxx.rpms.domain.Employee_Role" >
+    delete from employee_role
+    where employee_id = #{employeeId,jdbcType=BIGINT} AND role_id = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Employee_Role" >
+
+    insert into employee_role ( employee_id, role_id
+      )
+    values ( #{employeeId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Employee_Role" >
+    update employee_role
+    set employee_id = #{employeeId,jdbcType=BIGINT},
+      role_id = #{roleId,jdbcType=BIGINT}
+     where employee_id = #{employeeId} and role_id = #{roleId}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, employee_id, role_id
+    from employee_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, employee_id, role_id
+    from employee_role
+  </select>
+
+  <select id="selectIdByEidAndRid" resultMap="BaseResultMap" parameterType="cn.xxx.rpms.domain.Employee_Role" >
+    select id, employee_id, role_id
+    from employee_role
+    where employee_id = #{employeeId} and role_id = #{roleId}
+  </select>
+
+
+
+</mapper>

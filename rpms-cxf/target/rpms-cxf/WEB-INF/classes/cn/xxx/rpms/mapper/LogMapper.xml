@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Log" >
+    <id column="logId" property="logid" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="operateDate" property="operatedate" jdbcType="TIMESTAMP" />
+    <result column="remoteAddr" property="remoteaddr" jdbcType="VARCHAR" />
+    <result column="requestUri" property="requesturi" jdbcType="VARCHAR" />
+    <result column="method" property="method" jdbcType="VARCHAR" />
+    <result column="exception" property="exception" jdbcType="VARCHAR" />
+    <result column="timeout" property="timeout" jdbcType="TIMESTAMP" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="params" property="params" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from log
+    where logId = #{logid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Log" >
+    insert into log ( type, operateDate,
+      remoteAddr, requestUri, method, 
+      exception, timeout, userId, 
+      title, params)
+    values ( #{type,jdbcType=VARCHAR}, #{operatedate,jdbcType=TIMESTAMP},
+      #{remoteaddr,jdbcType=VARCHAR}, #{requesturi,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, 
+      #{exception,jdbcType=VARCHAR}, #{timeout,jdbcType=TIMESTAMP}, #{userid,jdbcType=BIGINT}, 
+      #{title,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Log" >
+    update log
+    set type = #{type,jdbcType=VARCHAR},
+      operateDate = #{operatedate,jdbcType=TIMESTAMP},
+      remoteAddr = #{remoteaddr,jdbcType=VARCHAR},
+      requestUri = #{requesturi,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      exception = #{exception,jdbcType=VARCHAR},
+      timeout = #{timeout,jdbcType=TIMESTAMP},
+      userId = #{userid,jdbcType=BIGINT},
+      title = #{title,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR}
+    where logId = #{logid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select logId, type, operateDate, remoteAddr, requestUri, method, exception, timeout, 
+    userId, title, params
+    from log
+    where logId = #{logid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select logId, type, operateDate, remoteAddr, requestUri, method, exception, timeout, 
+    userId, title, params
+    from log
+  </select>
+  <select id="loadDataByQuery" resultMap="BaseResultMap" parameterType="cn.xxx.basic.query.BaseQuery">
+    select *
+    from log
+  </select>
+</mapper>

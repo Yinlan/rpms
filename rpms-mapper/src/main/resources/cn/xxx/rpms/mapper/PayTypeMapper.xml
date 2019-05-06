@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.PayTypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.PayType" >
+    <id column="payid" property="payid" jdbcType="BIGINT" />
+    <result column="paytypename" property="paytypename" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from paytype
+    where payid = #{payid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.PayType" >
+    insert into paytype ( paytypename)
+    values (#{paytypename,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.PayType" >
+    update paytype
+    set paytypename = #{paytypename,jdbcType=VARCHAR}
+    where payid = #{payid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select payid, paytypename
+    from paytype
+    where payid = #{payid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select payid, paytypename
+    from paytype
+  </select>
+  <select id="loadDataByQuery" resultMap="BaseResultMap" parameterType="cn.xxx.basic.query.BaseQuery" >
+    select payid, paytypename
+    from paytype
+  </select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/basic-core/basic-core.iml" filepath="$PROJECT_DIR$/basic-core/basic-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basic-utils/basic-utils.iml" filepath="$PROJECT_DIR$/basic-utils/basic-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carservice-total.iml" filepath="$PROJECT_DIR$/carservice-total.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpms-common/rpms-common.iml" filepath="$PROJECT_DIR$/rpms-common/rpms-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpms-cxf/rpms-cxf.iml" filepath="$PROJECT_DIR$/rpms-cxf/rpms-cxf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpms-mapper/rpms-mapper.iml" filepath="$PROJECT_DIR$/rpms-mapper/rpms-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpms-service/rpms-service.iml" filepath="$PROJECT_DIR$/rpms-service/rpms-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpms-web/rpms-web.iml" filepath="$PROJECT_DIR$/rpms-web/rpms-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+    </modules>
+  </component>
+</project>

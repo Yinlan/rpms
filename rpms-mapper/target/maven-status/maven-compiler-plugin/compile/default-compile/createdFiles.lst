@@ -1,0 +1,15 @@
+cn\xxx\rpms\mapper\MaintenancebuildMapper.class
+cn\xxx\rpms\mapper\Role_PermissionMapper.class
+cn\xxx\rpms\mapper\LogMapper.class
+cn\xxx\rpms\mapper\MaintenanceMapper.class
+cn\xxx\rpms\mapper\PayTypeMapper.class
+cn\xxx\rpms\mapper\EmployeeMapper.class
+cn\xxx\rpms\mapper\Menu_EmployeeMapper.class
+cn\xxx\rpms\mapper\OptMapper.class
+cn\xxx\rpms\mapper\Employee_RoleMapper.class
+cn\xxx\rpms\mapper\MenuMapper.class
+cn\xxx\rpms\mapper\MaintenanceItemMapper.class
+cn\xxx\rpms\mapper\UserMapper.class
+cn\xxx\rpms\mapper\PermissionMapper.class
+cn\xxx\rpms\mapper\RoleMapper.class
+cn\xxx\rpms\mapper\PartsMapper.class

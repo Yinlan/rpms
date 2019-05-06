@@ -1,0 +1,172 @@
+[{
+	"title" : "基础数据",
+	"icon" : "&#xe631;",
+	"href" : "page/systemParameter/systemParameter.html",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "租户管理",
+			"icon" : "&#xe609;",
+			"href" : "/tenant/main",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "数据字典",
+			"icon" : "&#xe609;",
+			"href" : "/systemdictionary/main",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "数据字典明细",
+			"icon" : "&#xe609;",
+			"href" : "/systemdictionaryitem/main",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "日志管理",
+			"icon" : "&#xe609;",
+			"href" : "/systemlog/main",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "套餐管理",
+			"icon" : "&#xe609;",
+			"href" : "/meal/main",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+}, {
+	"title" : "组织机构",
+	"icon" : "&#xe631;",
+	"href" : "page/systemParameter/systemParameter.html",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "员工管理",
+			"icon" : "&#xe61c;",
+			"href" : "/employee/index",
+			"spread" : false
+		},
+		{
+			"title" : "部门管理",
+			"icon" : "&#xe609;",
+			"href" : "/department/index",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+},{
+	"title" : "客户管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "客户信息管理",
+			"icon" : "&#xe61c;",
+			"href" : "http://www.taobao.com",
+			"spread" : false
+		},
+		{
+			"title" : "客户跟进管理",
+			"icon" : "&#xe609;",
+			"href" : "http://www.taobao.com",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "客户移交管理",
+			"icon" : "&#xe609;",
+			"href" : "http://www.taobao.com",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "客户资源池管理",
+			"icon" : "&#xe609;",
+			"href" : "http://www.taobao.com",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+},{
+	"title" : "权限管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "资源管理",
+			"icon" : "&#xe61c;",
+			"href" : "http://www.taobao.com",
+			"spread" : false
+		},
+		{
+			"title" : "权限管理",
+			"icon" : "&#xe609;",
+			"href" : "http://www.jd.cn",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "角色管理",
+			"icon" : "&#xe609;",
+			"href" : "http://www.taobao.com",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+},{
+	"title" : "订单合同",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "订单管理",
+			"icon" : "&#xe61c;",
+			"href" : "/order/main",
+			"spread" : false
+		},
+		{
+			"title" : "合同管理",
+			"icon" : "&#xe609;",
+			"href" : "/contract/main",
+			"spread" : false,
+			"target" : "_parent"
+		},
+		{
+			"title" : "合同明细",
+			"icon" : "&#xe609;",
+			"href" : "/contractitem/main",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+},{
+	"title" : "售后管理",
+	"icon" : "&#xe630;",
+	"href" : "",
+	"spread" : false,
+	"children" : [
+		{
+			"title" : "保修管理",
+			"icon" : "&#xe61c;",
+			"href" : "/guarantee/main",
+			"spread" : false
+		},
+		{
+			"title" : "保修明细",
+			"icon" : "&#xe609;",
+			"href" : "/guaranteeitem/main",
+			"spread" : false,
+			"target" : "_parent"
+		}
+	]
+}
+]

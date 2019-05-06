@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="rpms-web:test">
+    <output-path>$PROJECT_DIR$/..</output-path>
+    <root id="archive" name="rpms-web_war.war">
+      <element id="artifact" artifact-name="rpms-web:war exploded" />
+      <element id="dir-copy" path="$PROJECT_DIR$" />
+    </root>
+  </artifact>
+</component>

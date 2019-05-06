@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.PartsMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Parts" >
+    <id column="pid" property="pid" jdbcType="BIGINT" />
+    <result column="partsname" property="partsname" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="warnnum" property="warnnum" jdbcType="INTEGER" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from parts
+    where pid = #{pid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Parts" >
+    insert into parts ( partsname, price,
+      num, warnnum, context, 
+      createtime)
+    values ( #{partsname,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{num,jdbcType=INTEGER}, #{warnnum,jdbcType=INTEGER}, #{context,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Parts" >
+    update parts
+    set partsname = #{partsname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      warnnum = #{warnnum,jdbcType=INTEGER},
+      context = #{context,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where pid = #{pid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select pid, partsname, price, num, warnnum, context, createtime
+    from parts
+    where pid = #{pid,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select pid, partsname, price, num, warnnum, context, createtime
+    from parts
+  </select>
+  <select id="loadDataByQuery" resultMap="BaseResultMap" parameterType="cn.xxx.basic.query.BaseQuery">
+  select pid, partsname, price, num, warnnum, context, createtime
+  from parts
+</select>
+  <select id="checkNameQuery" resultMap="BaseResultMap" parameterType="cn.xxx.rpms.query.PartsQuery">
+    select pid, partsname, price, num, warnnum, context, createtime
+    from parts
+    <where>
+      <if test="partsname!=null and partsname!=''">
+        AND partsname=#{partsname,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+
+</mapper>

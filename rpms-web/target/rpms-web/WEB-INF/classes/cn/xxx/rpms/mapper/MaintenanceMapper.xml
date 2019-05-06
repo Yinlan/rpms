@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.MaintenanceMapper" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from maintenance
+    where mainid = #{mainid,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Maintenance" >
+    insert into maintenance ( custormer, carnum,
+      createtime, status, optid,
+      address)
+    values ( #{custormer,jdbcType=VARCHAR}, #{carnum,jdbcType=VARCHAR},
+      #{createtime,jdbcType=TIMESTAMP}, #{status,jdbcType=BIT}, #{optid,jdbcType=BIGINT},
+      #{address,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Maintenance" >
+    update maintenance
+    set custormer = #{custormer,jdbcType=VARCHAR},
+      carnum = #{carnum,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      optid = #{optid,jdbcType=BIGINT},
+      address = #{address,jdbcType=VARCHAR}
+    where mainid = #{mainid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="maintenanceMap" parameterType="java.lang.Long" >
+        select main.mainid mainmainid,main.custormer maincustormer,
+         main.carnum maincarnum,main.createtime maincreatetime,
+         main.status mainstatus,main.optid mainoptid,main.address mainaddress,
+         item.itemid itemitemid,item.mainid itemmainid,item.opid itemopid,
+         item.pid itempid,item.amt1 itemamt1,item.amt2 itemamt2,
+         item.num itemnum,item.totalamt itemtotalamt
+
+    from maintenance main LEFT JOIN maintenanceitem item on main.mainid=item.mainid
+    where main.mainid = #{mainid,jdbcType=BIGINT}
+  </select>
+  <resultMap id="maintenanceMap" type="cn.xxx.rpms.domain.Maintenance">
+      <id property="mainid" column="mainmainid"/>
+      <result property="custormer" column="maincustormer"/>
+      <result property="carnum" column="maincarnum"/>
+      <result property="createtime" column="maincreatetime"/>
+      <result property="status" column="mainstatus"/>
+      <result property="address" column="mainaddress"/>
+    <association property="opt" column="mainoptid" select="cn.xxx.rpms.mapper.OptMapper.selectByPrimaryKey" javaType="cn.xxx.rpms.domain.Opt">
+      </association>
+    <collection property="maintenanceItems"  ofType="cn.xxx.rpms.domain.MaintenanceItem" >
+      <id column="itemitemid" property="itemid" jdbcType="BIGINT" />
+      <result column="itemmainid" property="mainid" jdbcType="BIGINT" />
+        <result column="itempid" property="opid" jdbcType="BIGINT" />
+
+      <result column="itemamt1" property="amt1" jdbcType="DECIMAL" />
+      <result column="itemamt2" property="amt2" jdbcType="DECIMAL" />
+      <result column="itemnum" property="num" jdbcType="INTEGER" />
+      <result column="itemtotalamt" property="totalamt" jdbcType="DECIMAL" />
+        <association property="parts" column="itempid" javaType="cn.xxx.rpms.domain.Parts" select="cn.xxx.rpms.mapper.PartsMapper.selectByPrimaryKey">
+
+        </association>
+    </collection>
+  </resultMap>
+  <select id="selectAll" resultMap="maintenanceMap" >
+    select main.mainid mainmainid,main.custormer maincustormer,
+         main.carnum maincarnum,main.createtime maincreatetime,
+         main.status mainstatus,main.optid mainoptid,main.address mainaddress,
+         item.itemid itemitemid,item.mainid itemmainid,item.opid itemopid,
+         item.pid itempid,item.amt1 itemamt1,item.amt2 itemamt2,
+         item.num itemnum,item.totalamt itemtotalamt
+
+    from maintenance main LEFT JOIN maintenanceitem item on main.mainid=item.mainid
+  </select>
+  <select id="loadDataByQuery" resultMap="maintenanceMap" parameterType="cn.xxx.basic.query.BaseQuery">
+    select main.mainid mainmainid,main.custormer maincustormer,
+         main.carnum maincarnum,main.createtime maincreatetime,
+         main.status mainstatus,main.optid mainoptid,main.address mainaddress,
+         item.itemid itemitemid,item.mainid itemmainid,item.opid itemopid,
+         item.pid itempid,item.amt1 itemamt1,item.amt2 itemamt2,
+         item.num itemnum,item.totalamt itemtotalamt
+
+    from maintenance main LEFT JOIN maintenanceitem item on main.mainid=item.mainid
+  </select>
+  <select id="loadDataByQueryLimt" resultMap="maintenanceMap" parameterType="cn.xxx.rpms.query.MaintenanceQuery">
+    select main.mainid mainmainid,main.custormer maincustormer,
+         main.carnum maincarnum,main.createtime maincreatetime,
+         main.status mainstatus,main.optid mainoptid,main.address mainaddress,
+         item.itemid itemitemid,item.mainid itemmainid,item.opid itemopid,
+         item.pid itempid,item.amt1 itemamt1,item.amt2 itemamt2,
+         item.num itemnum,item.totalamt itemtotalamt
+
+    from maintenance main LEFT JOIN maintenanceitem item on main.mainid=item.mainid
+    <where>
+        <if test="carnum!=null and carnum!='' ">
+            AND carnum LIKE concat("%",#{carnum},"%")
+        </if>
+    </where>
+  </select>
+
+</mapper>

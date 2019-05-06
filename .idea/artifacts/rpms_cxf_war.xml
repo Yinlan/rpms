@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rpms-cxf:war">
+    <output-path>$PROJECT_DIR$/rpms-cxf/target</output-path>
+    <root id="archive" name="rpms-cxf.war">
+      <element id="artifact" artifact-name="rpms-cxf:war exploded" />
+    </root>
+  </artifact>
+</component>

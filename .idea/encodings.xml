@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/basic-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-cxf" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-cxf/src/main/java/cn/xxx/client/cn/xxx/rpms/service/Add.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rpms-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test" charset="UTF-8" />
+  </component>
+</project>

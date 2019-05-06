@@ -1,0 +1,4 @@
+cn\xxx\basic\mapper\BaseMapper.class
+cn\xxx\basic\service\impl\BaseServiceImpl.class
+cn\xxx\basic\query\BaseQuery.class
+cn\xxx\basic\service\IBaseService.class

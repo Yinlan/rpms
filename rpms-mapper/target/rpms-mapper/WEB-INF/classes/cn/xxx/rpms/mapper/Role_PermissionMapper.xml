@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.Role_PermissionMapper" >
+  <resultMap id="BaseResultMap" type="cn.xxx.rpms.domain.Role_Permission" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="permission_id" property="permissionId" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from role_permission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByPidAndRid" parameterType="cn.xxx.rpms.domain.Role_Permission" >
+    delete from role_permission
+    where role_id= #{roleId,jdbcType=BIGINT} AND permission_id= #{permissionId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.Role_Permission" >
+
+    insert into role_permission ( role_id, permission_id
+      )
+    values ( #{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.Role_Permission" >
+    update role_permission
+    set role_id = #{roleId,jdbcType=BIGINT},
+      permission_id = #{permissionId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, role_id, permission_id
+    from role_permission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, role_id, permission_id
+    from role_permission
+  </select>
+  <select id="selectIdByRidAndPID" resultMap="BaseResultMap" parameterType="cn.xxx.rpms.domain.Role_Permission" >
+    select  id, role_id, permission_id
+    from role_permission
+    where role_id = #{roleId} and permission_id = #{permissionId}
+  </select>
+
+
+</mapper>

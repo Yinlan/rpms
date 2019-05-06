@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rpms-mapper:war">
+    <output-path>$PROJECT_DIR$/rpms-mapper/target</output-path>
+    <root id="archive" name="rpms-mapper.war">
+      <element id="artifact" artifact-name="rpms-mapper:war exploded" />
+    </root>
+  </artifact>
+</component>

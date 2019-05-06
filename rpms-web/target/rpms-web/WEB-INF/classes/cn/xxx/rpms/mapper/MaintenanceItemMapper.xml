@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.xxx.rpms.mapper.MaintenanceItemMapper" >
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from maintenanceitem
+    where itemid = #{itemid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.xxx.rpms.domain.MaintenanceItem" >
+    insert into maintenanceitem ( mainid, opid,
+      pid, amt1, amt2, num, 
+      totalamt)
+    values ( #{mainid,jdbcType=BIGINT}, #{opid,jdbcType=BIGINT},
+      #{pid,jdbcType=BIGINT}, #{amt1,jdbcType=DECIMAL}, #{amt2,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
+      #{totalamt,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.xxx.rpms.domain.MaintenanceItem" >
+    update maintenanceitem
+    set mainid = #{mainid,jdbcType=BIGINT},
+      opid = #{opid,jdbcType=BIGINT},
+      pid = #{pid,jdbcType=BIGINT},
+      amt1 = #{amt1,jdbcType=DECIMAL},
+      amt2 = #{amt2,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      totalamt = #{totalamt,jdbcType=DECIMAL}
+    where itemid = #{itemid,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="maintenanceItemMapper" parameterType="java.lang.Long" >
+     select
+    mainitem.itemid mainitemitemid,
+    mainitem.mainid  mainitemmainid,
+    mainitem.opid  mainitemopid,
+    mainitem.pid mainitempid,
+    mainitem.amt1 mainitemamt1,
+    mainitem.amt2 mainitemamt2,
+    mainitem.num mainitemnum,
+    mainitem.totalamt mainitemtotalamt
+    from maintenanceitem mainitem
+    where  mainitem.itemid = #{itemid,jdbcType=BIGINT}
+  </select>
+  <resultMap id="maintenanceItemMapper" type="cn.xxx.rpms.domain.MaintenanceItem" >
+    <id column="mainitemitemid" property="itemid" jdbcType="BIGINT" />
+    <result column="mainitemmainid" property="mainid" jdbcType="BIGINT" />
+    <result column="mainitemopid" property="opid" jdbcType="BIGINT" />
+
+    <result column="mainitemamt1" property="amt1" jdbcType="DECIMAL" />
+    <result column="mainitemamt2" property="amt2" jdbcType="DECIMAL" />
+    <result column="mainitemnum" property="num" jdbcType="INTEGER" />
+    <result column="mainitemtotalamt" property="totalamt" jdbcType="DECIMAL" />
+    <association property="parts" column="mainitempid" javaType="cn.xxx.rpms.domain.Parts" select="cn.xxx.rpms.mapper.PartsMapper.selectByPrimaryKey">
+
+    </association>
+  </resultMap>
+  <select id="selectAll" resultMap="maintenanceItemMapper" >
+    select
+    mainitem.itemid mainitemitemid,
+    mainitem.mainid  mainitemmainid,
+    mainitem.opid  mainitemopid,
+    mainitem.pid mainitempid,
+    mainitem.amt1 mainitemamt1,
+    mainitem.amt2 mainitemamt2,
+    mainitem.num mainitemnum,
+    mainitem.totalamt mainitemtotalamt
+    from maintenanceitem mainitem
+  </select>
+  <select id="loadDataByQuery" resultMap="maintenanceItemMapper" parameterType="cn.xxx.rpms.query.MaintenanceItemQuery">
+    select
+    mainitem.itemid mainitemitemid,
+    mainitem.mainid  mainitemmainid,
+    mainitem.opid  mainitemopid,
+    mainitem.pid mainitempid,
+    mainitem.amt1 mainitemamt1,
+    mainitem.amt2 mainitemamt2,
+    mainitem.num mainitemnum,
+    mainitem.totalamt mainitemtotalamt
+    from maintenanceitem mainitem
+    WHERE  mainid=#{id,jdbcType=BIGINT}
+  </select>
+</mapper>
